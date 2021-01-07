@@ -1,0 +1,7 @@
+allowlist.txt
+blocklist.txt
+testlist.txt
+test.js
+pac.txt
+pac.txt.bak
+__pycache__
