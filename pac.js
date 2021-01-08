@@ -3,7 +3,7 @@ var bl = JSON.parse('blocklist');
 
 var proxy = '__PROXY__';
 var direct = 'DIRECT;';
-if (proxy === '__PRO' + 'XY__') // 小心压缩时被优化掉，手动替换一下
+if (proxy == '__PRO' + 'XY__') // 小心压缩时被优化掉，手动替换一下
     proxy = eval('__PRO' + 'XY__');
 
 var hop = Object.hasOwnProperty;
@@ -26,4 +26,4 @@ function FindProxyForURL(url, host) {
             return proxy;
         pos = host.lastIndexOf('.', pos - 1);
     }
-}
+};

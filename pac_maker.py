@@ -5,9 +5,9 @@ from typing import Iterable
 
 
 pacjsminified = """\
-var al=JSON.parse('allowlist');
-var bl=JSON.parse('blocklist');
-var proxy="__PROXY__",direct="DIRECT;";"__PROXY__"===proxy&&(proxy=eval("__PRO'+'XY__"));var hop=Object.hasOwnProperty;function FindProxyForURL(r,o){if(hop.call(al,o))return direct;var l,t=o.lastIndexOf(".");for(t=o.lastIndexOf(".",t-1);;){if(t<=0)return hop.call(bl,o)?proxy:direct;if(l=o.substring(t+1),hop.call(bl,l))return proxy;t=o.lastIndexOf(".",t-1)}}"""
+al=JSON.parse('allowlist');
+bl=JSON.parse('blocklist');
+var proxy="__PROXY__",direct="DIRECT;";"__PRO"+"XY__"==proxy&&(proxy=eval("__PRO"+"XY__"));var hop=Object.hasOwnProperty;function FindProxyForURL(r,o){if(hop.call(al,o))return direct;var l,t=o.lastIndexOf(".");for(t=o.lastIndexOf(".",t-1);;){if(t<=0)return hop.call(bl,o)?proxy:direct;if(l=o.substring(t+1),hop.call(bl,l))return proxy;t=o.lastIndexOf(".",t-1)}};"""
 
 
 # 从文件中读取并去掉空行和注释
