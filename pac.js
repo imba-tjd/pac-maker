@@ -13,7 +13,6 @@ function FindProxyForURL(url, host) {
 
     var suffix;
     var pos = host.lastIndexOf('.');
-    pos = host.lastIndexOf('.', pos - 1);
     while (true) {
         if (pos <= 0) {
             if (hop.call(bl, host))
