@@ -42,7 +42,7 @@ if not exists('pac.txt'):
 
 with open('pac.txt') as f:
     pactxt = f.read()
-pactxt = pactxt.replace('__PROXY__', 'PROXY;')
+pactxt = pactxt.replace('__PROXY__', 'PROXY;') + '\n'
 with open('test.js', 'w+') as f:
     f.write(pactxt)
 
