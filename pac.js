@@ -1,27 +1,28 @@
-var al = JSON.parse('allowlist');
-var bl = JSON.parse('blocklist');
+al = JSON.parse('allowlist');
+bl = JSON.parse('blocklist');
 
-var proxy = '__PROXY__';
-var direct = 'DIRECT;';
-if (proxy == '__PRO' + 'XY__') // 小心压缩时被优化掉，手动替换一下
+proxy = '__PROXY__';
+direct = 'DIRECT;';
+if (proxy == '__PRO' + 'XY__') // 压缩时会被优化掉，手动替换一下
     proxy = eval('__PRO' + 'XY__');
 
-var hop = Object.hasOwnProperty;
-function FindProxyForURL(url, host) {
-    if (hop.call(al, host))
+oho = Object.hasOwn;
+
+function FindProxyForURL(_, host) {
+    if (oho(al, host))
         return direct;
 
     var suffix;
     var pos = host.lastIndexOf('.');
     while (true) {
         if (pos <= 0) {
-            if (hop.call(bl, host))
+            if (oho(bl, host))
                 return proxy;
             else
                 return direct;
         }
-        suffix = host.substring(pos + 1);
-        if (hop.call(bl, suffix))
+        suffix = host.slice(pos + 1);
+        if (oho(bl, suffix))
             return proxy;
         pos = host.lastIndexOf('.', pos - 1);
     }

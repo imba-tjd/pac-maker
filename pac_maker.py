@@ -7,11 +7,11 @@ from typing import Iterable
 pacjsminified = """\
 al=JSON.parse('allowlist')
 bl=JSON.parse('blocklist')
-proxy="__PROXY__",direct="DIRECT;";"__PRO"+"XY__"==proxy&&(proxy=eval("__PRO"+"XY__"));hop=Object.hasOwnProperty;function FindProxyForURL(r,l){if(hop.call(al,l))return direct;for(var o,a=l.lastIndexOf(".");;){if(a<=0)return hop.call(bl,l)?proxy:direct;if(o=l.substring(a+1),hop.call(bl,o))return proxy;a=l.lastIndexOf(".",a-1)}}"""
+proxy="__PROXY__",direct="DIRECT;",proxy=="__PRO"+"XY__"&&(proxy=eval("__PROXY__")),oho=Object.hasOwn;function FindProxyForURL(i,r){if(oho(al,r))return direct;for(var l,e=r.lastIndexOf(".");;){if(e<=0)return oho(bl,r)?proxy:direct;if(l=r.slice(e+1),oho(bl,l))return proxy;e=r.lastIndexOf(".",e-1)}}"""
 
 
-# 从文件中读取并去掉空行和注释
 def readfromfile(filename: str):
+    '''读取文件并去掉空行和注释'''
     with open(filename, encoding='u8') as f:
         for line in f:
             if (hashndx := line.find('#')) != -1:
@@ -29,7 +29,7 @@ def domainlist_to_jsonobjstr(lst: Iterable[str]):
 def make_pac_content(altxt: Iterable[str], bltxt: Iterable[str]):
     al = domainlist_to_jsonobjstr(altxt)
     bl = domainlist_to_jsonobjstr(bltxt)
-    return pacjsminified.replace('allowlist', al, 1).replace('blocklist', bl, 1)
+    return pacjsminified.replace('allowlist', al).replace('blocklist', bl)
 
 
 def _main():
