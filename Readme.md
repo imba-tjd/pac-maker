@@ -12,7 +12,8 @@ A simple suffix domain matching pac.txt generator. Use it if you want to control
 
 * `null` seems to be faster than `undefined`
 * `JSON.parse` seems to be faster than literal object
-* Inspired by the pac.txt from ssr.
+* Inspired by the pac.txt from ssr
+* `Object.hasOwn` is too new. It only works with FF >= 92 and Chrome >= 93
 
 ## 测试方法
 
