@@ -34,6 +34,7 @@ def pactxt_syntax_test():
 
     with open('pac.txt') as f:
         pactxt = f.read()
+    assert pactxt.count('__PROXY__') == 1
     pactxt = pactxt.replace('__PROXY__', 'PROXY;')
 
     tempf = tempfile.NamedTemporaryFile()
