@@ -1,52 +1,51 @@
-from pac_maker import *
+from pac_maker import striplines, domainlist_to_jsonobjstr
 import json
 import os
-from os.path import exists
-import sys
 import subprocess
-
-# test readfromfile
-testlist_content = '''
-# comment
-a.com # comment
-b.org
-'''
-
-with open('testlist.txt', 'w+') as f:
-    f.write(testlist_content)
-
-testlist_readed = list(readfromfile('testlist.txt'))
-assert testlist_readed == ['a.com', 'b.org']
+import tempfile
 
 
-# test domainlist_to_jsonobjstr
-testlist_jsonobj = json.loads(domainlist_to_jsonobjstr(testlist_readed))
-assert len(testlist_jsonobj) == 2
-assert 'a.com' in testlist_jsonobj
-assert 'b.org' in testlist_jsonobj
+def striplines_test():
+    lines = '''
+    # comment
+    a.com   # zxcv
+    b.org
+    # asdf
+    '''.splitlines()
+
+    lines_stripped = list(striplines(lines))
+    assert lines_stripped == ['a.com', 'b.org']
 
 
-# test js syntax
-if not exists('pac.txt'):
-    if exists('allowlist.txt') and exists('blocklist.txt'):
-        pass
-    elif not(exists('allowlist.txt') and exists('blocklist.txt')):
-        os.rename('testlist.txt', 'blocklist.txt')
-        with open('allowlist.txt', 'w+'):
-            pass
-    else:
-        sys.exit()
+def domainlist_to_jsonobjstr_test():
+    domainlist = ['a.com', 'b.org']
+    jsonobjstr = domainlist_to_jsonobjstr(domainlist)
 
-    from pac_maker import _main
-    _main() # Generate pac.txt
+    jsonobj = json.loads(jsonobjstr)
+    assert len(jsonobj) == 2
+    assert 'a.com' in jsonobj
+    assert 'b.org' in jsonobj
 
-with open('pac.txt') as f:
-    pactxt = f.read()
-pactxt = pactxt.replace('__PROXY__', 'PROXY;') + '\n'
-with open('test.js', 'w+') as f:
-    f.write(pactxt)
 
-try:
-    subprocess.run(['node', 'test.js'], check=True)
-except OSError:  # nodejs isn't installed
-    pass
+def pactxt_syntax_test():
+    if not os.path.exists('pac.txt'):
+        print('pac.txt not found. Skip syntax test.')
+        return
+
+    with open('pac.txt') as f:
+        pactxt = f.read()
+    pactxt = pactxt.replace('__PROXY__', 'PROXY;')
+
+    tempf = tempfile.NamedTemporaryFile()
+    tempf.write(pactxt.encode())
+    tempf.flush()
+
+    try:
+        subprocess.run(['node', tempf.name], check=True)
+    except OSError:
+        print('nodejs is not installed. Skip syntax test.')
+
+if __name__ == '__main__':
+    striplines_test()
+    domainlist_to_jsonobjstr_test()
+    pactxt_syntax_test()

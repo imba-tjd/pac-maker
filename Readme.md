@@ -15,15 +15,13 @@ A simple suffix domain matching pac.txt generator. Use it if you want to control
 * Inspired by the pac.txt from ssr
 * `Object.hasOwn` is too new. It only works with FF >= 92 and Chrome >= 93
 
-## 测试方法
+## 如何测试FindProxyForURL
 
-1. 准备好黑白名单
-2. 运行Run.bat，会生成pac.txt
-3. 运行test.py，会生成test.js
-4. 打开node REPL，全选test.js里的东西复制粘贴。不能在VSC的终端中打开，有BUG
-5. FindProxyForURL('','xxx')
+1. 打开浏览器F12的Console
+2. 输入`__PROXY__='PROXY;'`
+3. 复制pac.txt里的内容输入
+4. `FindProxyForURL('','xxx')`
 
 ## TODO
 
-* 重写测试
-* 改用Set
+* 改用Set？但初始化列表一次，传进Set又一次，不知道效率如何
