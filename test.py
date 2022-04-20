@@ -28,7 +28,7 @@ def domainlist_to_jsonobjstr_test():
 
 
 def pactxt_syntax_test():
-    if not os.path.exists('pac.txt'):
+    if not os.path.isfile('pac.txt'):
         print('pac.txt not found. Skip syntax test.')
         return
 

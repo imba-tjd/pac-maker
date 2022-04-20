@@ -46,7 +46,7 @@ def _main():
     bltxt = striplines(readfile('blocklist.txt'))
     pac_content = make_pac_content(altxt, bltxt)
 
-    if os.path.exists('pac.txt'):
+    if os.path.isfile('pac.txt'):
         shutil.copy2('pac.txt', 'pac.txt.bak')
 
     with open('pac.txt', 'w+') as f:
