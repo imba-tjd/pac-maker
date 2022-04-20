@@ -12,8 +12,7 @@ proxy="__PROXY__",direct="DIRECT;",proxy=="__PRO"+"XY__"&&(proxy=eval("__PRO"+"X
 
 def readfile(filename: str):
     with open(filename, encoding='u8') as f:
-        for line in f:
-            yield line
+        yield from f
 
 
 def striplines(lines: Iterable[str]):
