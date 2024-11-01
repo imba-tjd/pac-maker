@@ -26,6 +26,11 @@ Inspired by the pac.txt from ssr.
 3. 复制pac.txt里的内容输入
 4. `FindProxyForURL('','xxx')`
 
+### FindProxyForURL(url, host)
+
+* url：对于https，不包含path和query，但包含端口。
+* 返回字符串：'DIRECT' 或 'PROXY host:port' 'SOCKS host:port' 多个项可用分号隔开，若代理服务器失败了，每隔30分钟重试
+
 ## TODO
 
 * 改用Set？但初始化列表一次，传进Set又一次，不知道效率如何
@@ -33,5 +38,7 @@ Inspired by the pac.txt from ssr.
 ## Resources
 
 * https://developer.mozilla.org/en-US/docs/Web/HTTP/Proxy_servers_and_tunneling/Proxy_Auto-Configuration_PAC_file
+  * 文件以 .pac 结尾
+  * MIME为 application/x-ns-proxy-autoconfig
 * https://learn.microsoft.com/previous-versions/troubleshoot/browsers/connectivity-navigation/optimize-pac-performance
 * https://findproxyforurl.com/pac-functions/
